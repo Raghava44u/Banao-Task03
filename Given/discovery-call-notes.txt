@@ -1,0 +1,199 @@
+DISCOVERY CALL NOTES - STRUCTURAL STEEL CLIENT
+Two calls in the same week. Nothing has been proposed to them yet.
+
+Client attendee: an engineer in Cost Control (a colleague joins briefly on
+call 1).
+
+How these notes were made: transcribed from the call recordings. Our side's
+introductions, pitch, suggestions and case studies are removed. Our questions
+are kept as "Q:". The client's words are lightly cleaned up for transcription
+errors and are otherwise as said.
+
+==============================================================================
+CALL 1
+==============================================================================
+
+CLIENT:
+"I have spoken to one other supplier. They told us they would suggest
+different software packages for us to implement. In your case, would you only
+develop the software and hand it to us?"
+(We said we develop and deliver with our own team.)
+
+"Have you gone through the Word document I sent? [We had the pointers, not the
+document.] Honestly, even we don't have a clear idea of how AI can be
+integrated into our company. In the last section I listed several areas in our
+operations where we think AI could be used. We'd also like your expertise.
+Once you have studied the company, tell us where else we could use it and how
+we can improve the process."
+
+Q: So you're looking for a consultation first, and then for us to develop the
+solution?
+
+"Yes, that's what we are looking for."
+
+Q: Which area would you start with?
+
+"If I have to pick one item, I'd pick nesting optimisation, the second point
+I wrote down.
+
+Everything we do is structural steel. We cut the steel, fabricate it and
+deliver it to our clients. Before we fabricate, we have to cut the steel into
+shapes. Nesting is when we do that cutting digitally, on a screen. They have
+software that holds the shapes of the steel we order. They cut the steel
+virtually, and then it goes to the factory, where the physical cutting
+happens. So nesting is where we plan the cutting and the material digitally.
+
+Right now our challenge is that we don't have enough data to analyse how much
+steel is being wasted, how much of that we could have prevented, and which
+materials are not being used. With an automated system we would know
+automatically that an item could have been used in another drawing, on another
+project. Right now a person does this. There is no software for
+auto-allocation or anything like that. There are several things we could
+develop there. That's a rough overview."
+
+Q: Is the planning rule-based software, or manual?
+
+"The planning is done manually, all of it. There are rules and conditions we
+follow, but with software I think the automation and allocation would be
+better."
+
+Q: Roughly what percentage of material do you lose to wastage today?
+
+"It depends on the type of steel. For plate material, the manual data shows
+about 20 to 25%. For profiles it's 5 to 10%. It depends on a lot of other
+factors, but on average you can take 7 to 10% overall."
+
+Q: Do nesting plans change during a project, or is there one plan?
+
+"We give a fixed budget at the start. A lot changes during the process, but the
+budget stays fixed and they have to meet it."
+
+Q: Any other areas you'd like to walk us through?
+
+COLLEAGUE: "We have more areas: yard optimisation, optimising the loading plan
+for trailers, and some factory operations."
+
+CLIENT: "For the layout planning, you could focus on the warehouse: how we
+store material today and how we could store it optimally. That's one area we
+could look at."
+
+"We'll send you links to our web platforms so you can get a sense of the
+company and our operations."
+
+(Asked for the next call in the same week: "I have to give my office an update
+within this week.")
+
+==============================================================================
+CALL 2
+==============================================================================
+
+Q: Can you walk us through how material and a project move through the
+company?
+
+"The first team involved is business development. They bid for projects, and
+the estimation team supports them by pricing each project. Once we win,
+planning and engineering come in. Planning schedules the project: when it will
+be finished and delivered, when material should be procured, when fabrication
+starts. We give the client a completion date based on that.
+
+Engineering releases the fabrication drawings. In our industry every structure
+has drawings, and the factory works from those. Once the drawings are
+finalised, they go to the nesting team. Material arrives from purchasing in
+full sizes, so it has to be cut into the shapes we need. The nesting team cuts
+it virtually in the software, and then it goes to the factory.
+
+In the factory, the first department is sizing, which does the physical
+cutting. After that comes fabrication, which does fit-up and welding to join
+the steel into the required structure. Then comes coating: painting,
+galvanising and fireproofing. Sometimes a job needs all three, sometimes only
+one, depending on the client. Once coating is done, dispatch packs the
+material and delivers it to the client."
+
+Q: How many projects run at the same time?
+
+"Around 10 to 15. Our capacity is about 80,000 tonnes a year, so roughly 7,000
+to 8,000 tonnes a month. Depending on project sizes, we run more or fewer
+projects."
+
+Q: Is nesting done per project, or per day across all the projects that have
+material in?
+
+"It's done per project. Once drawings are released, we buy material for each
+project separately. Each project has its own rates, so the material is released
+for that particular project only."
+
+Q: How often do drawings change?
+
+"That's one area where we have problems. We get the initial drawing, and then
+revisions keep coming. We don't have a clear record of that data. It's
+something we're still working on with our current software."
+
+Q: How is material stored once it arrives?
+
+"We buy material according to the project timeline. If a project has to be
+delivered early, we buy early.
+
+For storage, we don't follow a proper sequence. When material arrives, it goes
+into the store yard. Sometimes the material we need ends up at the very bottom,
+so it takes longer to get out when it's needed. We don't store it according to
+project requirements, and those requirements keep changing with the client
+anyway. Right now a lot of projects are on hold because of the current
+situation and shipment problems, so things change a lot. That makes planning
+and storing material very difficult."
+
+"One more point. When a loss comes from a client revision, we can claim it back.
+But right now we don't know how many tonnes we lose to our own engineering
+errors. That area needs proper data tracking."
+
+"Nesting is something we already want AI to optimise."
+
+Q: What software do you use?
+
+"The CNC machines in the factory do the cutting. For nesting we use Strumis and
+a PLM package, and we're moving more onto Strumis. Strumis works like an ERP
+for us. All our data goes through it, and it has a nesting section. That's our
+main software.
+
+Nesting is done manually today. Say there's a full plate: they nest it by hand.
+It's done by people, not by AI. We asked them why, because the software has an
+automatic nesting option. The nesting team said automatic nesting wastes more
+material and that they save more doing it by hand. We're not sure how accurate
+that is, so we need that data as well."
+
+(When sharing one purchased plate between two projects was raised:)
+"When we buy material, its cost is loaded onto that particular project. All
+our cost loading works that way. I'm not sure how feasible it is to split the
+same material across projects. I'd have to check with my team. I don't know
+much about nesting myself. I only see it from the outside."
+
+"Right now, if half a sheet is left over, it's recorded as an offcut. When they
+nest new projects, they check the offcuts first to see if anything can be used.
+But I don't think they use the offcuts as well as they could. The idea is
+already there, but it could be done better."
+
+Q: Is your transport hired in?
+
+"We have our own fleet: around 13 trailers, plus forklifts and mobile cranes.
+When we need extra equipment, we hire it in. We also already have software we
+use internally. There's a GPS tracker called CarTrack that records how long
+each piece of equipment in the factory sits idle. Then there's a booking
+system, where each department books a vehicle in advance and we track
+utilisation. We brought these in over the last six months and haven't made full
+use of what they produce yet. I only make reports from the booking system.
+
+Our utilisation is very low. Even with all this equipment, we are still forced
+to hire extra trailers, and management is very unhappy about that. We want to
+reduce idle time, and we face a lot of problems in that area too. You could
+look at our software and tell us how to use it better, or suggest other
+software to connect with it."
+
+==============================================================================
+Areas the client raised across the two calls, in their own words:
+  - nesting optimisation (their first pick on call 1)
+  - tracking drawing revisions
+  - warehouse / store-yard storage and the sequence for getting material out
+  - loading plan for trailers
+  - yard optimisation
+  - equipment / trailer utilisation (idle time, extra hiring)
+==============================================================================
+End of notes.
