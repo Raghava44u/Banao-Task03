@@ -18,14 +18,14 @@ However, a disciplined Forward Deployed Engineering (FDE) operational audit reve
 3. **Physical Yard Retrieval Friction:** Plates are stored in unsequenced yard stacks up to 8 plates deep; shop-floor crane riggers ignore recorded offcuts because digging them out causes massive crane delays.
 4. **Conflated Waste Classifications:** The reported 7–10% waste conflates unavoidable torch kerf, client-billable drawing revisions, unrecovered remnants, and genuine geometric packing inefficiencies.
 
-**The Recommended Solution:** We recommend **NOT** building an unexplainable deep-learning model or buying another black-box COTS nesting tool. Instead, we propose the **Material Intelligence & Assisted Nesting Co-Pilot (MINC)**: a human-in-the-loop decision-support system that integrates with Strumis and CAD exports. MINC pairs a deterministic remnant-preserving optimization engine with a cross-project material attribution mechanism and an operational remnant retrieval scorer that accounts for crane unstacking penalties.
+**The Recommended Solution:** We recommend **NOT** building an unexplainable deep-learning model or buying another black-box COTS nesting tool. Instead, we propose the **Material Intelligence & Assisted Nesting Co-Pilot (MINC)**: a human-in-the-loop decision-support system that integrates with Strumis and CAD exports. MINC pairs a deterministic remnant-preserving optimization engine with a cross-project material attribution mechanism and an operational remnant retrieval scorer that accounts for crane unstacking penalties. (A functional prototype demonstrating 1D Best-Fit Decreasing and 2D Maximal Rectangles packing is implemented and verified in `prototype/demo_benchmark.py`).
 
-**Projected Impact (Base Case):**
-- **1,200 tonnes of avoidable scrap eliminated annually** (1.50% absolute reduction in material waste).
+**Target Planning Scenario (Subject to Historical Replay Verification):**
+- **1,200 tonnes of avoidable scrap targeted annually** (1.50% absolute reduction in material waste).
 - **350 tonnes of client-driven revision scrap captured** for contractual reimbursement ($332,500).
-- **Gross Annual Benefit:** **$1,112,500 / year**.
+- **Target Gross Annual Benefit:** **$1,112,500 / year**.
 - **Investment:** $280,000 one-time implementation + $60,000/year recurring SaaS/support.
-- **Economics:** **227.2% Year 1 ROI** with a **3.7-month payback period** and a 3-Year NPV of **$2.34M**.
+- **Projected Economics:** **227.2% Year 1 ROI** with a **3.7-month payback period** and a 3-Year NPV of **$2.34M**.
 
 ---
 
@@ -142,7 +142,7 @@ We recommend deploying **MINC (Material Intelligence & Assisted Nesting Co-Pilot
 1. **Respects Human Expertise:** Operators maintain 100% final approval authority. The system acts as a high-speed calculator finding combinations across 15 projects that no human can compute manually.
 2. **Solves the Accounting Blocker:** Automatically generates an internal cost-transfer record crediting Project A when Project B consumes its remnant or shares a raw plate.
 3. **Solves the Yard Reality:** Features a **Crane Depth Penalty Scorer** ($35/unstack move). If a remnant is buried 5 plates deep, MINC mathematically skips it and nests virgin stock, matching shop-floor physics.
-4. **Deterministic Optimization, NOT LLMs for Geometry:** Combines Gilmore-Gomory Linear Programming for 1D profiles and Guided Local Search with No-Fit Polygons for 2D plates. LLMs are strictly confined to parsing text revision markups.
+4. **Deterministic Optimization, NOT LLMs for Geometry:** The current working prototype implements 1D Best-Fit Decreasing and 2D Maximal Rectangles (MaxRects) packing. The production roadmap (Phases 1–2) scales this to Gilmore-Gomory Linear Programming for 1D and Guided Local Search with No-Fit Polygons for complex polygonal CAD parts. LLMs are strictly confined to parsing text revision markups.
 
 ---
 

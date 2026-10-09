@@ -1,50 +1,64 @@
-# Prototype Benchmark & Financial Validation Suite
+# Prototype Benchmark & Engineering Feasibility Validation Harness
 
-This prototype supports the Forward Deployed Engineering Case Study for **Client B (Structural Steel Fabricator)**.
+This prototype provides an empirical, deterministic validation harness supporting the Forward Deployed Engineering Case Study for **Client B (Structural Steel Fabricator)**.
 
-It provides a lightweight, deterministic validation harness demonstrating that material savings, cross-project co-nesting, remnant retrieval economics, and multi-scenario ROI can be modeled rigorously without deploying unexplainable deep learning or black-box LLMs to geometric nesting.
-
----
-
-## 1. What This Prototype Demonstrates
-
-1. **1D Profile Cutting Stock (Beams & Columns):**
-   - Compares current project-siloed sequential/first-fit cutting against cross-project best-fit linear packing.
-   - Preserves large, usable remnants ($\ge 2.5\text{m}$) and reduces true scrap by 3.6% absolute on sample profile runs.
-2. **2D Plate Nesting & Cross-Project Co-Nesting:**
-   - Demonstrates that combining plate requirements across active projects (e.g. 20mm S355JR gusset and base plates) eliminates partial sheet drop waste and consolidates remnants into clean, reusable rectangular plates.
-3. **Remnant Matching Engine & Yard Retrieval Penalty:**
-   - Evaluates whether pulling a remnant from the yard is financially and operationally justified.
-   - Explicitly models the **crane unstack penalty** (\$35/move for buried plates) to ensure the system never asks crane riggers to unstack deep piles for small parts.
-4. **Comprehensive Financial Sensitivity Model:**
-   - Models the full 80,000 tonnes/year fabrication operation.
-   - Evaluates Conservative, Base, and Upside scenarios (0.75%, 1.50%, and 2.25% absolute waste reduction).
-   - Incorporates client revision scrap cost recovery.
-   - Calculates Year 1 ROI, Payback Period, and 3-Year NPV.
+It demonstrates the operational mechanics of material consolidation, physical constraint enforcement, and economic modeling **without deploying black-box AI or unexplainable models to geometric cutting**.
 
 ---
 
-## 2. Quick Run Instructions
+## 1. What This Prototype Implements (Current Capabilities)
 
-### Run the Benchmark Runner
+1. **1D Profile Cutting Stock Heuristic:**
+   - **Algorithm:** Best-Fit Decreasing (BFD) bin packing with strict segregation by `section_profile` (e.g. UB vs UC) and `material_grade` (e.g. S355JR vs S275).
+   - **Dimensional Feasibility:** Explicit guardrail rejecting pieces exceeding the 12.0m stock beam length.
+   - **Cross-Project Control:** Configurable `allow_cross_project` toggle demonstrating that pooling cuts across compatible projects reduces rounding/boundary scrap.
+   - **Scrap Accounting:** Exact accounting for saw kerf ($5\text{mm}$), reusable prime offcuts ($\ge 2.5\text{m}$), and true process scrap.
+2. **2D Rectangular Plate MaxRects Nesting Engine:**
+   - **Algorithm:** Maximal Rectangles (MaxRects) bin packing heuristic with Best-Short-Side-Fit (BSSF).
+   - **Physical Feasibility:** Generates exact $(x, y, w, l, \text{rotation})$ coordinates for every part.
+   - **Manufacturing Constraints:** Enforces $5\text{mm}$ torch kerf spacing, $25\text{mm}$ plate perimeter clamp margins, and strict dimension checks rejecting oversized parts.
+   - **Zero Overlap:** Mathematically verified pairwise non-overlap across all placed parts.
+   - **Remnant Detection:** Measures the actual largest contiguous free rectangle $(W_{\text{rem}}, L_{\text{rem}})$ remaining on the plate bed to identify reusable rectangular offcuts ($\ge 3.0\text{m}^2$).
+3. **Quantity-Aware Remnant Matching & Economics:**
+   - Evaluates grid packing capacity on stored yard offcuts against required order quantities.
+   - Deducts crane retrieval penalties based on stack depth ($35/unstack move).
+   - Penalizes residual scrap created when cutting small parts from larger offcuts.
+4. **Parametric Financial Sensitivity Model:**
+   - Models the full 80,000 tonnes/year fabrication operation across Conservative, Base, and Upside scenarios.
+   - Incorporates client revision scrap cost recovery, Year 1 ROI, payback period, and 3-Year NPV.
+
+---
+
+## 2. Distinction Between Prototype vs Target Production Architecture
+
+| Capability | Current Prototype Implementation | Target Production Architecture (Phase 1–2) |
+| :--- | :--- | :--- |
+| **1D Profile Nesting** | Best-Fit Decreasing (BFD) greedy heuristic | Gilmore-Gomory Linear Programming / Column Generation |
+| **2D Plate Nesting** | MaxRects rectangular bin packing heuristic | Guided Local Search with No-Fit Polygons (NFP) for irregular CAD shapes |
+| **Geometry Input** | Parametric rectangular part dimensions | Direct parsing of Tekla Structures DSTV/NC1 and DXF files |
+| **ERP / Inventory Integration** | In-memory synthetic datastructures | Read-only SQL/ODBC connectors to Strumis ERP tables |
+| **Financial Savings** | **Unvalidated Target Scenarios** ($1,200\text{t} / \$1.11\text{M}$) | **Empirical Ground Truth** measured via 50-job Historical Replay |
+
+> **IMPORTANT:** The financial figures ($1.11M base annual benefit, 227% Year 1 ROI) are **target planning scenarios** calibrated to Client B's reported capacity. They are **NOT** claimed as guaranteed or proven until the Phase 1 Historical Replay Benchmark is executed against 50–100 actual completed Strumis jobs.
+
+---
+
+## 3. Quick Run Instructions
+
+### Run the Benchmark Harness
 ```bash
 python prototype/demo_benchmark.py
 ```
 
-### Run the Automated Test Suite
+### Run the Automated Test Suite (11 Tests)
 ```bash
 python -m pytest prototype/tests/test_prototype.py -v
 ```
 
 ---
 
-## 3. Key Synthetic Benchmark Output Highlights
+## 4. Key Verified Benchmark Outputs
 
-- **1D Cutting Stock:** Stock 12m universal beams reduced from 25 to 24 (4.0% reduction in ordered stock), with 4.2m preserved as prime reusable offcut.
-- **2D Plate Nesting:** Master 6m x 2.5m plates reduced from 4 to 3 (2.35 tonnes saved), preserving 6.0 $m^2$ clean rectangular drop.
-- **Remnant Evaluation:** Identified accessible remnant in Position 2, netting +$149.20 net gain after paying crane move penalty.
-- **Financial Validation (Base Scenario):**
-  - **1,200 tonnes material waste saved/year**
-  - **$780,000 direct steel savings + $332,500 revision recovery**
-  - **$1,112,500 Gross Annual Benefit**
-  - **227.2% Year 1 ROI with 3.7 months payback period**
+- **1D Cutting Stock:** Stock 12m universal beams reduced from 25 to 24 (4.0% reduction in ordered stock) solely when cross-project pooling is enabled, preserving 4.2m of reusable drop.
+- **2D Plate Nesting:** Master 6m x 2.5m plates reduced from 4 to 3 (2.35 tonnes saved), preserving a verified $2.45\text{m} \times 2.76\text{m}$ ($6.77\text{ m}^2$) prime rectangular offcut with zero part overlap.
+- **Remnant Evaluation:** Correctly allocates partial quantity (1 of 10) to accessible offcut with positive net gain (+$106.85) after crane move and residual scrap penalties.

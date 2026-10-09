@@ -78,8 +78,8 @@ Because it directly removes the four real operational blockers:
 ### 11. How does the solution work?
 1. Ingests cut lists, BOMs, and raw inventory from Strumis and Tekla CAD.
 2. Identifies parts across active projects with compatible delivery windows and steel grades.
-3. Evaluates yard remnants, scoring them against fresh plates and penalizing buried pieces.
-4. Optimizes 1D profile cuts using linear programming and 2D plates using Guided Local Search with No-Fit Polygons, packing parts to preserve large rectangular offcuts.
+3. Evaluates yard remnants, scoring them against fresh plates, checking grid capacity against quantity, and penalizing buried pieces.
+4. Optimizes cutting: the prototype implements 1D Best-Fit Decreasing and 2D Maximal Rectangles (MaxRects) bin packing with exact millimeter coordinates and remnant preservation; the production roadmap scales this to Gilmore-Gomory Linear Programming and Guided Local Search with No-Fit Polygons for complex polygonal CAD parts.
 5. Displays candidate nests side-by-side with the planner's manual layout on the Co-Pilot Desk.
 6. The planner reviews metrics (utilization %, dollar savings, crane moves) and clicks "Accept" or logs a reason code.
 7. Approved plans export directly to Strumis CNC post-processors, and actual scrap bin weights are logged to measure real-world savings.

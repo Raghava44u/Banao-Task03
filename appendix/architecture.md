@@ -97,15 +97,15 @@ This document details the complete end-to-end software architecture for the **Ma
 
 ## 3. Optimization Engine Mechanics
 
-### 3.1 1D Profile Optimizer (Beams, Columns, Bracing)
-- **Problem Formulation:** Multi-project 1D cutting stock problem with kerf and offcut consolidation.
-- **Algorithm:** Hybrid Column Generation using Integer Linear Programming (CBC/HiGHS solver) coupled with a Best-Fit Decreasing heuristic.
-- **Key Constraint:** Multi-project cutting allows combining cut marks across projects whose required-on-site delivery dates fall within the same 10-day fabrication window.
-- **Remnant Rule:** Any stock end-cut $\ge 2,500\text{mm}$ is penalized less than short cuts ($< 2,500\text{mm}$), forcing the solver to bundle short cuts together and preserve one long, prime structural beam rather than multiple useless drops.
+### 3.1 Implemented Prototype Engine (`prototype/demo_benchmark.py`)
+- **1D Profile Cutting Stock:** Best-Fit Decreasing (BFD) bin packing heuristic with strict `section_profile` and `material_grade` compatibility segregation, length guardrails ($12.0\text{m}$ max), configurable `allow_cross_project` pooling control, and exact kerf/remnant accounting.
+- **2D Plate Nesting:** Maximal Rectangles (MaxRects) bin packing with Best-Short-Side-Fit (BSSF). Generates explicit millimeter coordinates $(x, y, w, l, \text{rotation})$ for every part, guarantees zero overlap, enforces $5\text{mm}$ kerf spacing and $25\text{mm}$ clamp margins, and measures actual largest remaining rectangular offcuts.
+- **Remnant Matching:** Quantity-aware grid fit evaluator balancing virgin steel cost saved against crane unstack penalties and residual scrap costs.
 
-### 3.2 2D Plate Nesting Engine
-- **Algorithm:** Guided Local Search (GLS) with No-Fit Polygon (NFP) collision evaluation.
-- **Remnant-Preserving Constraint:**
+### 3.2 Target Production Scaled Engine (Phase 1–2 Roadmap)
+- **1D Linear Programming:** Hybrid Column Generation using Integer Linear Programming (CBC/HiGHS solver) to achieve global mathematical optimality across high-volume cut catalogs.
+- **2D Irregular Polygon Nesting:** Guided Local Search (GLS) with No-Fit Polygon (NFP) collision evaluation to nest complex non-rectangular CAD geometries directly from Tekla DSTV/NC1 files.
+- **Remnant-Preserving Objective:**
   Standard auto-nesters minimize bounding box length, often leaving an L-shaped or stepped jagged remnant that shop floor operators cannot use. MINC enforces a **Max-Rectangular Drop Incentive**:
   $$\text{Score} = \text{UtilArea} + \alpha \cdot \text{Area}(\text{MaxInscribedRectangle}(\text{UnusedDrop}))$$
   This mathematically drives the nesting layout to pack small gusset plates into one corner of the master plate, leaving a clean, rectangular remnant with minimum width $\ge 1,500\text{mm}$ and length $\ge 2,000\text{mm}$.
