@@ -2,7 +2,7 @@
 ## Forward Deployed Engineering Case Study & Production Pilot Proposal
 
 **Client:** Tier-1 Structural Steel Fabricator (80,000 tonnes/year | 10–15 concurrent projects)  
-**Author:** Senior Forward Deployed Engineer / AI Product Solutions Architect  
+**Author:** Forward Deployed Engineer / AI Product Solutions Architect  
 **Primary Client Contact:** Cost Control Engineering Lead  
 **Systems Landscape:** Strumis Steel ERP/Nesting, Tekla BIM/CAD (DSTV/NC1), CNC Cutting Tables, 13-Trailer Fleet, CarTrack GPS  
 
